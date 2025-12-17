@@ -2,7 +2,7 @@
 
 // Proxy server URL - replace with your actual deployed server URL when in production
 // const PROXY_SERVER_URL = 'chrome-dictionary-proxy-server.vercel.app';
-const PROXY_SERVER_URL = 'https://chrome-dictionary-proxy-server.vercel.app';
+const PROXY_SERVER_URL = 'https://contextual-dictionary-extension.vercel.app';
 
 // Listen for messages from content script
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
