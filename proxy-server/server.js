@@ -15,8 +15,9 @@ app.use(cors());
 app.use(express.json());
 
 const API_KEY = process.env.GEMINI_API_KEY;
-const genAI = new GoogleGenAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+const ai = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY});
+// const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+// const model = ai.models({ model: 'gemini-2.5-flash' });
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
@@ -44,8 +45,11 @@ app.post('/api/analyze', async (req, res) => {
       - Analysis must be based on facts, no hallucinations.
     `;
 
-    const result = await model.generateContent(prompt);
-    const response = result.response.text();
+    const result = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+    });
+    const response = result.text;
 
     res.status(200).json({
       success: true,
@@ -82,8 +86,13 @@ app.post('/api/definition', async (req, res) => {
       - Parts of speech surrounded by [].
     `;
 
-    const result = await model.generateContent(prompt);
-    const response = result.response.text();
+    // const result = await model.generateContent(prompt);
+    // const response = result.response.text();
+    const result = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+    });
+    const response = result.text;
 
     res.status(200).json({
       success: true,
@@ -91,6 +100,7 @@ app.post('/api/definition', async (req, res) => {
     });
   } catch (error) {
     console.error('AI definition error:', error);
+    console.error('USING API_KEY: ', API_KEY);
     res.status(500).json({
       success: false,
       error: error.message,
