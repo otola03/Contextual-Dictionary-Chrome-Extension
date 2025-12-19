@@ -5,7 +5,7 @@ inject();
 
 const express = require('express');
 const cors = require('cors');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { GoogleGenAI } = require('@google/genai');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,9 +14,9 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = process.env.API_KEY;
-const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+const API_KEY = process.env.GEMINI_API_KEY;
+const genAI = new GoogleGenAI(API_KEY);
+const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
