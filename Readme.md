@@ -9,7 +9,10 @@
   ![image](./image.png)
   <br></br>
 
-  Gemini API used: ( gemini-2.0-flash )
+  (Uses gemini-2.0-flash model)
+
+## How to use it
+Download and load the files in [Chrome Extension tab](chrome://extensions/)
 
 ## Proxy Server
 
